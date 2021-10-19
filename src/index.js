@@ -2,6 +2,7 @@ import React from 'react';
 import App from './app/layout/App';
 import reportWebVitals from './reportWebVitals';
 import reactDom from 'react-dom';
+import 'semantic-ui-css/semantic.min.css';
 import './app/layout/styles.css';
 
 const rootEL = document.getElementById('root');
