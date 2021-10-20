@@ -4,11 +4,14 @@ import reportWebVitals from './reportWebVitals';
 import reactDom from 'react-dom';
 import 'semantic-ui-css/semantic.min.css';
 import './app/layout/styles.css';
+import { BrowserRouter } from 'react-router-dom';
 
 const rootEL = document.getElementById('root');
 
 function render() {
-  reactDom.render(<App/>, rootEL);
+  reactDom.render(
+    <BrowserRouter><App/></BrowserRouter>,
+    rootEL);
 }
 
 if (module.hot) {
