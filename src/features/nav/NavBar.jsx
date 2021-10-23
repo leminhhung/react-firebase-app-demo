@@ -20,6 +20,7 @@ export default function NavBar() {
                     <img src="assets/logo.png" alt="logo" style={{marginRight: 15}}></img>
                 </Menu.Item>
                 <Menu.Item as={NavLink} to='/events' name='Events'/>
+                <Menu.Item as={NavLink} to='/sandbox' name='Sandbox'/>
                 {authenticated &&
                 <Menu.Item as={NavLink} to='/createEvent'>
                     <Button positive inverted content='Create Event'></Button>
