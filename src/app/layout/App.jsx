@@ -7,11 +7,13 @@ import Eventform from "../../features/events/eventForm/EventForm";
 import HomePage from "../../features/home/HomePage";
 import NavBar from "../../features/nav/NavBar";
 import Sanbox from "../../features/sandbox/sandbox";
+import ModalManager from "../common/modals/ModalManager";
 
 function App() {
   const {key} = useLocation();
   return (
     <>
+    <ModalManager/>
     <Route exact path='/' component={HomePage}></Route>
     <Route
       path={'/(.+)'}

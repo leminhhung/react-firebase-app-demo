@@ -7,7 +7,7 @@ export default function HomePage({history}) {
             <Container>
                 <Header as='h1' inverted>
                     <Image size='massive' src='/assets/logo.png' style={{marginBottom: 12}}></Image>
-                    hunglm
+                    lmh.hunglm@gmail.com
                 </Header>
                 <Button size='huge' inverted onClick={() => history.push('/events')}>
                     Get started
