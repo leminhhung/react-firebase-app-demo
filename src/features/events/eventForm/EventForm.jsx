@@ -1,3 +1,4 @@
+/* global google */
 import cuid from "cuid";
 import { Formik, Form } from "formik";
 import React from "react";
@@ -12,6 +13,7 @@ import MyTextArea from "../../../app/common/form/MyTextArea";
 import MySelectInput from "../../../app/common/form/MySelectInput";
 import { categoryData } from "../../../app/api/CategoryOptions";
 import MyDateInput from "../../../app/common/form/MyDateInput";
+import MyPlaceInput from "../../../app/common/form/MyPlaceInput";
 
 export default function Eventform({match, history}) {
     const dispatch = useDispatch();
@@ -20,8 +22,14 @@ export default function Eventform({match, history}) {
         title: '',
         category: '',
         description: '',
-        city: '',
-        venue: '',
+        city: {
+            address: '',
+            latLng: null
+        },
+        venue: {
+            address: '',
+            latLng: null
+        },
         date: ''
     }
     
@@ -29,9 +37,13 @@ export default function Eventform({match, history}) {
         title: Yup.string().required('You must provide a title'),
         category: Yup.string().required('You must provide a category'),
         description: Yup.string().required('You must provide a description'),
-        city: Yup.string().required('You must provide a city'),
-        venue: Yup.string().required('You must provide a venue'),
-        date: Yup.string().required('You must provide a date')
+        city: Yup.object().shape({
+            address: Yup.string().required('You must provide a city')
+        }),
+        venue: Yup.object().shape({
+            address: Yup.string().required('You must provide a city')
+        }),
+        date: Yup.string().required('You must provide a city')
     })
 
     return (
@@ -51,15 +63,24 @@ export default function Eventform({match, history}) {
                     history.push('/events');
                 }}
             >
-                {({isSubmitting, dirty, isValid}) => (
+                {({isSubmitting, dirty, isValid, values}) => (
                     <Form className='ui form'>
                         <Header sub color='teal' content='Event Details'/>
                         <MyTextInput name='title' placeholder='Event title'/>
                         <MySelectInput name='category' placeholder='Event Category' options={categoryData}/>
                         <MyTextArea name='description' placeholder='Event Description' rows={2}/>
                         <Header sub color='teal' content='Event Location Details'/>
-                        <MyTextInput name='city' placeholder='Event City'/>
-                        <MyTextInput name='venue' placeholder='Event Venue'/>
+                        <MyPlaceInput name='city' placeholder='Event City'/>
+                        <MyPlaceInput
+                            name='venue'
+                            disabled={!values.city.latLng}
+                            placeholder='Event Venue'
+                            options={{
+                                location: new google.maps.LatLng(values.city.latLng),
+                                radius: 1000,
+                                types: ['establishment']
+                            }}
+                        />
                         <MyDateInput
                             name='date'
                             placeholderText='Event Date'

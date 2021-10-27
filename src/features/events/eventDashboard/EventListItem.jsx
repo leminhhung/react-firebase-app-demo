@@ -26,7 +26,7 @@ export default function EnventListItem({event}) {
             <Segment>
                 <span>
                     <Icon name='clock'/> {format(event.date, 'MMM d, yyy h:mm a')}
-                    <Icon name='clock'/> {event.venue}
+                    <Icon name='clock'/> {event.venue.address}
                 </span>
             </Segment>
             <Segment secondary>
